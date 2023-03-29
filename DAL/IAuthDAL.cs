@@ -1,5 +1,5 @@
 ﻿using ResumeNET.DAL.Models;
-namespace ResumeNET.DAL.Auth
+namespace ResumeNET.DAL
 {
     public interface IAuthDAL
     {

@@ -2,7 +2,7 @@
 using Dapper;
 using Npgsql;
 
-namespace ResumeNET.DAL.Auth
+namespace ResumeNET.DAL
 {
     public class AuthDAL : IAuthDAL
     {
@@ -13,8 +13,8 @@ namespace ResumeNET.DAL.Auth
                 connection.Open();
                 return await connection.QueryFirstOrDefaultAsync<UserModel>(@"
                     select UserId, Email, Password, Salt, Status 
-                    from AppUser
-                    where Email = @email", new { email = email }) ?? new UserModel();
+                    from appuser
+                    where Email = @email", new { email }) ?? new UserModel();
             }
         }
 
@@ -25,8 +25,8 @@ namespace ResumeNET.DAL.Auth
                 connection.Open();
                 return await connection.QueryFirstOrDefaultAsync<UserModel>(@"
                     select UserId, Email, Password, Salt, Status 
-                    from AppUser
-                    where UserId = @id", new {id=id}) ?? new UserModel();
+                    from appuser
+                    where UserId = @id", new { id }) ?? new UserModel();
             }
         }
 
@@ -35,7 +35,7 @@ namespace ResumeNET.DAL.Auth
             using (var connection = new NpgsqlConnection(DbHelper.connString))
             {
                 connection.Open();
-                string sql = @"insert into AppUser(Email, Password, Salt, Status)
+                string sql = @"insert into appuser(Email, Password, Salt, Status)
                         values(@Email, @Password, @Salt, @Status)";
                 return await connection.ExecuteAsync(sql, model);
             }

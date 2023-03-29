@@ -1,7 +1,12 @@
+using ResumeNET.BL.Auth;
+using ResumeNET.DAL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<IAuthDAL, AuthDAL>();
+builder.Services.AddSingleton<IAuthBL, AuthBL>();
 
 var app = builder.Build();
 
